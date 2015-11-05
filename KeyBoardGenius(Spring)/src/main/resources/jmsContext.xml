@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+	>
+	
+	<!-- ActiveMQ MQ Factory-->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL"> 
+			<value>${activemq_url}</value> 
+		</property> 
+	</bean>
+
+	<bean id="userCredentialsConnectionFactory" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+        <property name="targetConnectionFactory">
+            <ref bean="connectionFactory" />
+        </property>
+        <!--<property name="username" value="${mq_userName}" />
+        <property name="password" value="${mq_password}" />-->
+    </bean>
+    
+	<!-- 通用的文本消息转换器 -->
+    <bean id="TextMsgConverter" class="com.hisense.traveltime.gather.bean.TextMsgConverter"/>	
+
+	<!-- 消息数据的消费者-->
+	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter"> 
+		<constructor-arg>
+          <ref bean="messageListener" />
+        </constructor-arg>
+        <property name="defaultListenerMethod" value="onMessage"/>
+        <property name="messageConverter" ref="TextMsgConverter"/>
+	</bean>
+	
+	<!-- 检测数据的监听容器 -->
+ 	<bean id="passlistenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+        <property name="connectionFactory" ref="userCredentialsConnectionFactory"/>  
+        <property name="messageListener" ref="messageListenerAdapter"/>  
+        <property name="destinationName" value="${activemq_topic}"/>
+        <property name="pubSubDomain" value="true"/>
+    </bean>
+
+    <bean id="messageListener" class="com.hisense.traveltime.gather.consumer.MessageListenerImpl">
+        <property name="cacheService" ref="cacheService"></property>
+        <property name="agingTime" value="${agingTime}"></property>
+        <property name="batchCount" value="${batch_count}"></property>
+        <property name="batchCycle" value="${batch_cycle}"></property>
+        <property name="taskExecutor" ref="taskExecutor"></property>
+    </bean>
+    
+  </beans>

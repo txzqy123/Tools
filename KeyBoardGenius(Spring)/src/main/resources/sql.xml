@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+    <sql id="queryMonitorPointsSql">
+        <![CDATA[
+			select distinct upper_code as monitorcode
+			  from tt_roadlink
+			 where logic_del = 0
+			union
+			select distinct lower_code as monitorcode
+			  from tt_roadlink
+			 where logic_del = 0
+        ]]>
+    </sql>
+    
+    <sql id="queryMonitorPointsConfigSql">
+		<![CDATA[    	
+			select t.pointcode,
+				   t.pointname,
+			       t.east,
+			       t.west,
+			       t.north,
+			       t.northeast,
+			       t.northwest,
+			       t.south,
+			       t.southwest,
+			       t.southeast
+			  from tt_monitor_point t
+			 where t.logic_delete = 0
+	        ]]>    
+	  </sql>
+</sqls>

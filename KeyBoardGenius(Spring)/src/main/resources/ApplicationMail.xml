@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	>
+	
+	
+	
+	<!-- <bean id="smtpAuthenticator"
+		class="com.function.service.SmtpAuthenticator">
+		<constructor-arg value="757912398@qq.com"></constructor-arg>
+		<constructor-arg value="20150922123"></constructor-arg>
+	</bean>
+	<bean id="mailSession" class="javax.mail.Session"
+		factory-method="getInstance">
+		<constructor-arg>
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+					<prop key="mail.smtp.socketFactory.port">465</prop>
+					<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory
+					</prop>
+					<prop key="mail.smtp.socketFactory.fallback">
+					false
+					</prop>
+				
+			</props>
+		</constructor-arg>
+		<constructor-arg ref="smtpAuthenticator" />
+	</bean>
+
+	<bean id="mailSender1"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.qq.com" />
+		<property name="port" value="25" />
+		<property name="session" ref="mailSession" />
+	</bean> -->
+
+
+	<bean id="mailSender1" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>527537928@qq.com</value>
+        </property>
+        <property name="password">
+            <value>zhuqinghui050481</value>
+        </property>
+    </bean>
+	<bean id="mailSender2" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>757912398@qq.com</value>
+        </property>
+        <property name="password">
+            <value>20150922123</value>
+        </property>
+    </bean>
+	<bean id="mailSender3" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>812434583@qq.com</value>
+        </property>
+        <property name="password">
+            <value>yeweiya0705</value>
+        </property>
+    </bean>
+	<bean id="mailSender4" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>365008802@qq.com</value>
+        </property>
+        <property name="password">
+            <value>061989zqy123</value>
+        </property>
+    </bean>
+	<bean id="mailSender5" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>1904471961@qq.com</value>
+        </property>
+        <property name="password">
+            <value>573831540wo</value>
+        </property>
+    </bean>
+	<bean id="mailSender6" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>1790514763@qq.com</value>
+        </property>
+        <property name="password">
+            <value>18561809191wo</value>
+        </property>
+    </bean>
+	<bean id="mailSender7" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>1461800624@qq.com</value>
+        </property>
+        <property name="password">
+            <value>shiyang1997</value>
+        </property>
+    </bean>
+	<bean id="mailSender8" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>1032882500@qq.com</value>
+        </property>
+        <property name="password">
+            <value>9270142441wo</value>
+        </property>
+    </bean>
+	<bean id="mailSender9" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>656803703@qq.com</value>
+        </property>
+        <property name="password">
+            <value>?yfl7758258</value>
+        </property>
+    </bean>
+	<bean id="mailSender10" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>120931514@qq.com</value>
+        </property>
+        <property name="password">
+            <value>xl120931514X</value>
+        </property>
+    </bean>
+	<bean id="mailSender11" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.163.com"/>
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+        <property name="username">
+            <value>gupiaodashiqq@163.com</value>
+        </property>
+        <property name="password">
+            <value>igchrjgegpxpqycq</value>
+        </property>
+    </bean>
+</beans>

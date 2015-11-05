@@ -1,0 +1,70 @@
+<project name="KeyBoardGenius" default="dist" basedir=".">
+
+    <property name="src.main.java" location="src/main/java" />
+    <property name="src.main.resources" location="src/main/resources" />
+    <property name="lib" location="lib" />
+    <property name="build" location="build" />
+    <property name="dist" location="dist" />
+    <property name="dist.project" location="dist/${ant.project.name}" />
+    <property name="dist.project.conf" location="${dist.project}/conf" />
+    <property name="dist.project.lib" location="${dist.project}/lib" />
+    <property name="jarName" value="KeyBoardGenius" />
+    <property name="shName" value="start.sh" />
+
+    <path id="classpath">
+        <fileset dir="${lib}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <target name="init" depends="clean">
+        <tstamp />
+        <mkdir dir="${build}" />
+    </target>
+
+    <target name="compile" depends="init" description="compile the source ">
+        <javac srcdir="${src.main.java}" destdir="${build}" encoding="UTF-8">
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution">
+        <mkdir dir="${dist}" />
+        <mkdir dir="${dist.project}" />
+        <mkdir dir="${dist.project.conf}" />
+        <mkdir dir="${dist.project.lib}" />
+        <copy todir="${dist.project.conf}" preservelastmodified="true">
+            <fileset dir="${src.main.resources}">
+            </fileset>
+        </copy>
+        <copy todir="${dist.project.lib}" preservelastmodified="true">
+            <fileset dir="${lib}">
+            </fileset>
+        </copy>
+        <manifestclasspath property="jar.classpath" jarfile="${dist.project}/${jarName}.jar">
+            <classpath>
+                <fileset dir="${dist.project.lib}">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </manifestclasspath>
+        <manifest file="${build}/MANIFEST.MF">
+            <attribute name="Main-Class" value="com.function.ProgramMain" />
+            <attribute name="Class-Path" value="./conf/ ${jar.classpath}" />
+        </manifest>
+        <jar jarfile="${dist.project}/${jarName}.jar" basedir="${build}" manifest="${build}/MANIFEST.MF">
+             <exclude name="MANIFEST.MF"/>
+        </jar>
+    	
+    	<echo file="${dist.project}/startup.sh" message="#! /bin/bash &#10; java -jar ${jarName}.jar >> /dev/null 2 >&amp; 1 &amp; echo $! > pid"/>
+        <echo file="${dist.project}/shutdown.sh" message="#! /bin/bash &#10; pid=`cat pid` &amp;&amp; kill $pid"/>
+    	
+        <tar compression="gzip" destfile="${dist}/${ant.project.name}.tar.gz" basedir="${dist}"/>
+        <delete dir="${dist.project}" />
+    </target>
+
+    <target name="clean" description="clean up">
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
+    </target>
+</project>
